@@ -1,0 +1,9 @@
+{% if order_detail %}
+    {%for item in order_detail%}
+        <li>
+            {{item}}
+        </li>
+    {%endfor%}
+{%else%}
+    <p> No item available </p>
+{%endif%}

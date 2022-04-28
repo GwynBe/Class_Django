@@ -1,0 +1,11 @@
+{% if orders %}
+    {% for order in orders %}
+        <li>
+            <a href="{% url 'sale_management:order_detail' order.id %}">
+                {{ order.id }}, {{order.customer_id}}, {{order.employee.id}}
+            </a>
+        </li>
+    {% endfor %}
+{% else %}
+    <p>No order available<p>
+{% endif %}
