@@ -1,1 +1,21 @@
-ten: {{ product.name }}, gia: {{product.price}}, ton kho: {{product.stock}}
+<style>
+    table, th, td {
+      border: 1px solid black;
+      border-collapse: collapse;
+    }
+</style>
+<h3>{{product.name}}</h3>
+<table style="width:100%">
+    <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Price</th>
+        <th>Stock</th>
+    </tr>
+    <tr>
+        <td>{{ product.id }}</a></td>
+        <td>{{ product.name }}</td>
+        <td>{{ product.price }}</td>
+        <td>{{ product.stock }}</td>
+    </tr>
+</table>

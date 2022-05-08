@@ -1,4 +1,4 @@
-{% if products %}
+{% comment %} {% if products %}
     {% for product in products %}
         <li>
             <a href="{% url 'sale_management:product_detail' product.id %}">
@@ -8,4 +8,32 @@
     {% endfor %}
 {% else %}
     <p>No product available<p>
-{% endif %}
+{% endif %} {% endcomment %}
+
+<style>
+    table, th, td {
+      border: 1px solid black;
+      border-collapse: collapse;
+    }
+</style>
+    
+    {% if products %}
+        <table style="width:100%">
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Stock</th>
+            </tr>
+            {% for item in products %}
+            <tr>
+                <td>{{ item.id }}</a></td>
+                <td><a href="{% url 'sale_management:product_detail' item.id %}">{{ item.name }}</td>
+                <td>{{ item.price }}</td>
+                <td>{{ item.stock }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    {% else %}
+        <h1>No product is available</h1>
+    {% endif %}
