@@ -1,4 +1,4 @@
-{% if orders %}
+{% comment %} {% if orders %}
     {% for order in orders %}
         <li>
             <a href="{% url 'sale_management:order_detail' order.id %}">
@@ -8,4 +8,33 @@
     {% endfor %}
 {% else %}
     <p>No order available<p>
-{% endif %}
+{% endif %} {% endcomment %}
+<style>
+    table, th, td {
+      border: 1px solid black;
+      border-collapse: collapse;
+    }
+</style>
+    
+    {% if orders %}
+        <table style="width:100%">
+            <tr>
+                <th>Id</th>
+                <th>Customer</th>
+                <th>Purchase Date</th>
+                <th>Delivery Date</th>
+                <th>Employee</th>
+            </tr>
+            {% for order in orders %}
+            <tr>
+                <td>{{ order.id }}</a></td>
+                <td><a href="{% url 'sale_management:order_detail' order.id %}">{{ order.customer }}</td>
+                <td>{{ order.ordered_at }}</td>
+                <td>{{ order.delivery_at }}</td>
+                <td>{{ order.employee }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    {% else %}
+        <h1>No order are available</h1>
+    {% endif %}

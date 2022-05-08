@@ -42,7 +42,7 @@ class Employee(TrackingAbstractModel):
     address = models.CharField(max_length=500)
     dob = models.DateField(null=True) #date of birth
     def __str__(self):
-        return f'{self.id} - {self.name}'
+        return f'{self.name}'
 
 
 class Customer(TrackingAbstractModel):
@@ -52,16 +52,16 @@ class Customer(TrackingAbstractModel):
     address = models.CharField(max_length=500)
     phone = models.CharField(max_length=20)
     def __str__(self):
-        return f'{self.id} - {self.name} - {self.phone}'
+        return f'{self.name} - {self.phone}'
 
 
 class Product(TrackingAbstractModel):
     id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=100)
-    price = models.BigIntegerField()
+    price = models.FloatField()
     stock = models.IntegerField()
     def __str__(self):
-        return f'{self.id} - {self.name} - {self.price} - {self.stock}'
+        return f'{self.name} - {self.price} - {self.stock}'
 
 
 class Order(TrackingAbstractModel):
@@ -78,7 +78,11 @@ class OrderDetail(TrackingAbstractModel):
     id = models.AutoField(primary_key=True)
     order = models.ForeignKey(Order, on_delete=models.CASCADE)
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    price = models.FloatField()
     quantity = models.IntegerField()
     def __str__(self):
         return f'{self.id} - {self.order} - {self.product} - {self.quantity}'
-
+    
+    @property
+    def subtotal(self):
+        return self.quantity * self.price

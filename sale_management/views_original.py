@@ -1,7 +1,10 @@
+from msilib.schema import ListView
+from re import template
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse, Http404
 from sale_management.models import Employee, Customer, Product, Order, OrderDetail
 from django.template import loader
+from django.views import generic
 
 # Create your views here.
 
@@ -11,12 +14,23 @@ def detail(request, employee_id):
         'employee': employee
     })
 
+class EmployeeDetailView(generic.DetailView):
+    template_name = "employee/detail.html"
+    model = Employee
+
 def listing(request):
     latest_employee_list = Employee.objects.order_by('-created_at')
     # template = loader.get_template('index.html')
     return render(request, template_name='employee/index.html', context={
         'latest_employee_list': latest_employee_list
     })
+
+class EmployeeListView(generic.ListView):
+    template_name = "employee/index.html"
+    context_object_name = 'latest_employee_list'
+
+    def get_queryset(self):
+        return Order.objects.order_by('id')
 
 def customer_list(request):
     customers = Customer.objects.order_by('id')
@@ -42,11 +56,11 @@ def product_detail(request, product_id):
         'product': product
     })
 
-def order_list(request):
-    orders = Order.objects.order_by('id')
-    return render(request, template_name='order/list.html', context={
-        'orders': orders
-    })
+# def order_list(request):
+#     orders = Order.objects.order_by('id')
+#     return render(request, template_name='order/list.html', context={
+#         'orders': orders
+#     })
 
 def order_detail(request, order_id):
     order_detail = OrderDetail.objects.filter(order_id=order_id)
@@ -54,5 +68,10 @@ def order_detail(request, order_id):
         'order_detail': order_detail
     })
 
-def order_item(request, order_detail_id):
-    order_item = OrderDetail.objects
+class OrderListView(generic.ListView):
+    template_name = "order/list.html"
+    context_object_name = 'orders'
+
+    def get_queryset(self):
+        return Order.objects.order_by('-created_at')
+
