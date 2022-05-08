@@ -8,7 +8,7 @@ class DetailView(generic.DetailView):
 
 class ListView(generic.ListView):
     template_name = 'employee/list.html'
-    context_object_name = 'latest_employee_list'
+    context_object_name = 'employee_list'
 
     def get_queryset(self):
         return Employee.objects.order_by('-created_at')

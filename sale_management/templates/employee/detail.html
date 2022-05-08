@@ -1,1 +1,21 @@
-{{ employee.name }}
+<style>
+    table, th, td {
+      border: 1px solid black;
+      border-collapse: collapse;
+    }
+</style>
+<h3>{{employee.name}}</h3>
+<table style="width:100%">
+    <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Address</th>
+        <th>Date of birth</th>
+    </tr>
+    <tr>
+        <td>{{ employee.id }}</a></td>
+        <td>{{ employee.name }}</td>
+        <td>{{ employee.address }}</td>
+        <td>{{ employee.dob }}</td>
+    </tr>
+</table>

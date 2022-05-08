@@ -16,22 +16,22 @@
     }
 </style>
     
-    {% if orders %}
+    {% if order %}
         <table style="width:100%">
             <tr>
                 <th>Id</th>
-                <th>Customer</th>
-                <th>Purchase Date</th>
-                <th>Delivery Date</th>
+                <th>Product</th>
+                <th>Price</th>
+                <th>Quantity</th>
                 <th>Employee</th>
             </tr>
-            {% for order in orders %}
+            {% for item in order.orderdetail_set.all %}
             <tr>
-                <td>{{ order.id }}</a></td>
-                <td><a href="{% url 'sale_management:order_detail' order.id %}">{{ order.customer }}</td>
-                <td>{{ order.purchase_date }}</td>
-                <td>{{ order.delivery_date }}</td>
-                <td>{{ order.employee }}</td>
+                <td>{{ item.id }}</a></td>
+                <td>{{ item.product }}</td>
+                <td>{{ item.price }}</td>
+                <td>{{ item.quantity }}</td>
+                <td>{{ item.subtotal }}</td>
             </tr>
             {% endfor %}
         </table>

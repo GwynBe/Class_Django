@@ -56,22 +56,15 @@ def product_detail(request, product_id):
         'product': product
     })
 
-# def order_list(request):
-#     orders = Order.objects.order_by('id')
-#     return render(request, template_name='order/list.html', context={
-#         'orders': orders
-#     })
+def order_list(request):
+    orders = Order.objects.order_by('id')
+    return render(request, template_name='order/list.html', context={
+        'orders': orders
+    })
 
 def order_detail(request, order_id):
     order_detail = OrderDetail.objects.filter(order_id=order_id)
     return render(request, template_name='order/detail.html', context={
         'order_detail': order_detail
     })
-
-class OrderListView(generic.ListView):
-    template_name = "order/list.html"
-    context_object_name = 'orders'
-
-    def get_queryset(self):
-        return Order.objects.order_by('-created_at')
 
